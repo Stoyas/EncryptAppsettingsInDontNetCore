@@ -1,0 +1,11 @@
+D:\Develop\ApiForEncrypt\ApiForEncrypt\bin\Debug\netcoreapp2.0\ApiForEncrypt.deps.json
+D:\Develop\ApiForEncrypt\ApiForEncrypt\bin\Debug\netcoreapp2.0\ApiForEncrypt.runtimeconfig.json
+D:\Develop\ApiForEncrypt\ApiForEncrypt\bin\Debug\netcoreapp2.0\ApiForEncrypt.runtimeconfig.dev.json
+D:\Develop\ApiForEncrypt\ApiForEncrypt\bin\Debug\netcoreapp2.0\ApiForEncrypt.dll
+D:\Develop\ApiForEncrypt\ApiForEncrypt\bin\Debug\netcoreapp2.0\ApiForEncrypt.pdb
+D:\Develop\ApiForEncrypt\ApiForEncrypt\obj\Debug\netcoreapp2.0\ApiForEncrypt.csprojAssemblyReference.cache
+D:\Develop\ApiForEncrypt\ApiForEncrypt\obj\Debug\netcoreapp2.0\ApiForEncrypt.csproj.CoreCompileInputs.cache
+D:\Develop\ApiForEncrypt\ApiForEncrypt\obj\Debug\netcoreapp2.0\ApiForEncrypt.AssemblyInfoInputs.cache
+D:\Develop\ApiForEncrypt\ApiForEncrypt\obj\Debug\netcoreapp2.0\ApiForEncrypt.AssemblyInfo.cs
+D:\Develop\ApiForEncrypt\ApiForEncrypt\obj\Debug\netcoreapp2.0\ApiForEncrypt.dll
+D:\Develop\ApiForEncrypt\ApiForEncrypt\obj\Debug\netcoreapp2.0\ApiForEncrypt.pdb
