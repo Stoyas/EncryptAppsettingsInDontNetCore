@@ -52,7 +52,7 @@ namespace Encrypt_with_Certificate
         }
 
         //4. encrypt/decrypy with protector
-        public virtual void Run(string keyList, string configPath)
+        public virtual void Run(string prePath, string configPath)
         {
 
         }
@@ -154,25 +154,31 @@ namespace Encrypt_with_Certificate
             // remove encryption file
             File.Delete(encryptPath);
         }
-
     }
 
     class Program
     {
         static void Main(string[] args)
         {
-            ////encrypt
-            //var listPath = @"D:\Develop\ApiForEncrypt\Encrypt\KeyList.json";
-            //var jsonPath = @"D:\Develop\ApiForEncrypt\Encrypt\appsettings.Development.json";
-            //var encrpyter = new Encrpyter(jsonPath);
-            //encrpyter.Run(listPath, jsonPath);
+            Console.WriteLine("please enter decesion: ");
+            var de = Console.ReadLine();
+            if (de == "e")
+            {
+                //encrypt
+                var listPath = @"D:\Develop\Encrypt-appsettings\Encrypt\KeyList.json";
+                var jsonPath = @"D:\Develop\Encrypt-appsettings\Encrypt\appsettings.Development.json";
+                var encrpyter = new Encrpyter(jsonPath);
+                encrpyter.Run(listPath, jsonPath);
+            }
+            else
+            {
+                //decrypt
+                var encryptPath = @"D:\Develop\Encrypt-appsettings\Encrypt\appsecret.txt";
+                var configPath = @"D:\Develop\Encrypt-appsettings\Encrypt\appsettings.Development.json";
+                var decrypter = new Decrypter(configPath);
+                decrypter.Run(encryptPath, configPath);
+            }
 
-
-            //decrypt
-            var encryptPath = @"D:\Develop\ApiForEncrypt\Encrypt\appsecret.txt";
-            var configPath = @"D:\Develop\ApiForEncrypt\Encrypt\appsettings.Development.json";
-            var decrypter = new Decrypter(configPath);
-            decrypter.Run(encryptPath, configPath);
         }
     }
 }
