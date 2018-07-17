@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
@@ -23,6 +24,7 @@ namespace Encrypt_with_Certificate
 
         public BaseProtector(string inputFile)
         {
+            LookupDic = new Dictionary<string, object>();
             //1. validate file
             if (String.IsNullOrEmpty(inputFile) || !File.Exists(inputFile))
             {
@@ -60,16 +62,20 @@ namespace Encrypt_with_Certificate
 
     class Encrpyter : BaseProtector
     {
+        public static Dictionary<string, object> EncryptDic { get; set; }
+        public static Dictionary<string, object> LookupDic { get; set; }
+        public static Dictionary<string, object> ConfigDic { get; set; }
+
+
         public Encrpyter(string inputFile) : base(inputFile)
         {
+            EncryptDic = new Dictionary<string, object>();
+            LookupDic = new Dictionary<string, object>();
         }
         public List<string> KeyList { get; set; }
         public string ProtectedJson { get; set; }
         public override void Run(string keyList, string inputFile)
         {
-            var encryptDic = new Dictionary<string, string>();
-            var lookupDic = new Dictionary<string, string>();
-            Dictionary<string, string> configDic;
             // get keys to be encrypted
             using (StreamReader reader = File.OpenText(keyList))
             {
@@ -81,27 +87,17 @@ namespace Encrypt_with_Certificate
             using (StreamReader configReader = File.OpenText(inputFile))
             {
                 var configFile = configReader.ReadToEnd();
-                configDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(configFile);
-                foreach (var key in configDic.Keys)
-                {
-                    // prevent ducpliate reaplacing
-                    if (KeyList.Contains(key) && !configDic[key].Contains("__"))
-                    {
-                        encryptDic.Add($"__{key}__", configDic[key]);
-                        lookupDic.Add(key, $"__{key}__");
-                    }
-                }
+                ConfigDic = JsonConvert.DeserializeObject<Dictionary<string, object>>(configFile);
+                // read from config compare with keys
+                ReadFromConfig(KeyList, ConfigDic);
 
-                foreach (var dicKey in lookupDic.Keys)
-                {
-                    configDic[dicKey] = lookupDic[dicKey];
-                }
+                ReplacingConfig(LookupDic, ConfigDic);
 
-                var secretJson = JsonConvert.SerializeObject(encryptDic);
+                var secretJson = JsonConvert.SerializeObject(EncryptDic);
                 ProtectedJson = base.DataProtector.Protect(secretJson);
             }
 
-            string newConfigJson = JsonConvert.SerializeObject(configDic);
+            string newConfigJson = JsonConvert.SerializeObject(ConfigDic);
             File.WriteAllText(inputFile, newConfigJson);
             // put protectedJson into file
             string directoryPath = String.Concat(Path.GetDirectoryName(inputFile), "\\appsecret.txt");
@@ -110,6 +106,85 @@ namespace Encrypt_with_Certificate
                 throw new ArgumentException($"{directoryPath} already exists");
             }
             File.WriteAllText(directoryPath,ProtectedJson);
+        }
+
+        // replacing config dictionary with lookup dictionary
+        private string Replace(string configFile, string secretTarget, string value)
+        {
+            using (File.Open(configFile) )
+            {
+                
+            }
+
+            var newConfig = config.Replace(secretTarget, value);
+            return newConfig;
+        }
+
+        private void ReplacingConfig(Dictionary<string, object> lookupDic, Dictionary<string, object> configDic)
+        {
+            foreach (KeyValuePair<string, object> pair in configDictionary)
+            {
+                if (pair.Value is Dictionary<string, object>)
+                    ReadFromConfig(keyList, (Dictionary<string, object>)pair.Value);
+                else
+                {
+                    if (pair.Value is ICollection)
+                    {
+                        var counter = 0;
+                        foreach (string item in (ICollection)pair.Value)
+                        {
+                            if (keyList.Contains(pair.Key) && !item.Contains("__"))
+                            {
+                                EncryptDic.Add($"__{pair.Key}{counter}__", item);
+                                LookupDic.Add(pair.Key, $"__{pair.Key}{counter}__");
+                                counter++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (keyList.Contains(pair.Key) && !pair.Value.ToString().Contains("__"))
+                        {
+                            EncryptDic.Add($"__{pair.Key}__", pair.Value);
+                            LookupDic.Add(pair.Key, $"__{pair.Key}__");
+                        }
+                    }
+                }
+            }
+        }
+
+        // read from config file and return lookup dictionary
+        public static void ReadFromConfig(List<string> keyList, Dictionary<string, object> configDictionary)
+        {
+            foreach (KeyValuePair<string, object> pair in configDictionary)
+            {
+                if (pair.Value is Dictionary<string, object>)
+                    ReadFromConfig(keyList, (Dictionary<string, object>)pair.Value);
+                else
+                {
+                    if (pair.Value is ICollection)
+                    {
+                        var counter = 0;
+                        foreach (string item in (ICollection)pair.Value)
+                        {
+                            if (keyList.Contains(pair.Key) && !item.Contains("__"))
+                            {
+                                EncryptDic.Add($"__{pair.Key}{counter}__", item);
+                                LookupDic.Add(pair.Key, $"__{pair.Key}{counter}__");
+                                counter++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (keyList.Contains(pair.Key) && !pair.Value.ToString().Contains("__"))
+                        {
+                            EncryptDic.Add($"__{pair.Key}__", pair.Value);
+                            LookupDic.Add(pair.Key, $"__{pair.Key}__");
+                        }
+                    }
+                }
+            }
         }
 
     }
