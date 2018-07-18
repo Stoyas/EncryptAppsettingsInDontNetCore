@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Dynamic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -24,12 +25,16 @@ namespace Encrypt_with_Certificate
     {
         public IDataProtector DataProtector { get; set; }
 
-        public BaseProtector(string inputFile)
+        public BaseProtector(string secretFile, string configFile)
         {
             //1. validate file
-            if (String.IsNullOrEmpty(inputFile) || !File.Exists(inputFile))
+            if (String.IsNullOrEmpty(secretFile) || !File.Exists(secretFile))
             {
-                throw new ArgumentNullException($"{inputFile} does not exist!");
+                throw new FileNotFoundException($"{secretFile} does not exist!");
+            }
+            if (String.IsNullOrEmpty(configFile) || !File.Exists(configFile))
+            {
+                throw new FileNotFoundException($"{secretFile} does not exist!");
             }
             //ToDo: validateFormat
 
@@ -57,7 +62,7 @@ namespace Encrypt_with_Certificate
 
     class Encrpyter : BaseProtector
     {
-        public Encrpyter(string inputFile) : base(inputFile)
+        public Encrpyter(string secretFile, string configFile) : base(secretFile, configFile)
         {
             
         }
@@ -84,7 +89,7 @@ namespace Encrypt_with_Certificate
 
     class Decrypter : BaseProtector
     {
-        public Decrypter(string inputFile) : base(inputFile)
+        public Decrypter(string secretFile, string configFile) : base(secretFile, configFile)
         {
         }
         public void DecryptConfig(string secretFile, string configPath)
@@ -112,25 +117,25 @@ namespace Encrypt_with_Certificate
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("please enter decesion: ");
-            var de = Console.ReadLine();
-            if (de == "e")
+            if (args[0] == String.Empty||args[1] == String.Empty || args[2] == String.Empty)
+                throw new InvalidEnumArgumentException($"input is not valid!");
+            var secretFile = args[1];
+            var configFile = args[2];
+            
+            if (args[0] == "e")
             {
-                //encrypt
-                var jsonPath = @"D:\Develop\Encrypt-appsettings\Encrypt\appsettings.json";
-                var appsecretPath = @"D:\Develop\Encrypt-appsettings\Encrypt\appsecret.json";
-                var encrpyter = new Encrpyter(jsonPath);
-                encrpyter.EncryptConfig(appsecretPath, jsonPath);
+                var encrpyter = new Encrpyter(secretFile, configFile);
+                encrpyter.EncryptConfig(secretFile, configFile);
+                Console.WriteLine("Encryption completed!");
             }
             else
             {
-                //decrypt
-                var encryptPath = @"D:\Develop\Encrypt-appsettings\Encrypt\appsecret.json";
-                var configPath = @"D:\Develop\Encrypt-appsettings\Encrypt\appsettings.json";
-                var decrypter = new Decrypter(configPath);
-                decrypter.DecryptConfig(encryptPath, configPath);
+                var decrypter = new Decrypter(secretFile, configFile);
+                decrypter.DecryptConfig(secretFile, configFile);
+                Console.WriteLine("Decryptino completed!");
             }
 
+            Console.ReadKey();
         }
     }
 }
