@@ -9,6 +9,7 @@ namespace Encrypt.Protector
 {
     public class BaseProtector
     {
+        public string Thumbprint { get; set; }
         public IDataProtector DataProtector { get; set; }
 
         public BaseProtector(string secretFile, string configFile)
@@ -29,11 +30,11 @@ namespace Encrypt.Protector
             store.Open(OpenFlags.ReadOnly);
             var certs = store.Certificates;
             var dataSafeCert = certs[0];
-            var thumbprint = dataSafeCert.Thumbprint;
+            Thumbprint = dataSafeCert.Thumbprint;
 
             //3. Instantiate the data protection system with thumbPrint
             var dataProtectionProvider = DataProtectionProvider.Create(
-                new DirectoryInfo(thumbprint ?? throw new InvalidOperationException()),
+                new DirectoryInfo(Thumbprint ?? throw new InvalidOperationException()),
                 configuration =>
                 {
                     configuration.SetApplicationName("generate protector");

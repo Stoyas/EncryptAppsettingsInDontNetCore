@@ -20,7 +20,7 @@ namespace Encrypt
 
                 if (args[0] == "e")
                 {
-                    var encrpyter = new Encrpyter(secretFile, configFile);
+                    var encrpyter = new Encrypter(secretFile, configFile);
                     encrpyter.EncryptConfig(secretFile, configFile);
                     Console.WriteLine("Encryption completed!");
                 }
