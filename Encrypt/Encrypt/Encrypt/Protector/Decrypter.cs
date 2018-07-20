@@ -41,7 +41,7 @@ namespace Encrypt.Protector
         }
 
         public static string Decrypt(string cipherText, string password,
-            string salt = "Kosher", string hashAlgorithm = "SHA1",
+            string salt = "Starbucks", string hashAlgorithm = "SHA1",
             int passwordIterations = 2, string initialVector = "OFRna73m*aze01xY",
             int keySize = 256)
         {
