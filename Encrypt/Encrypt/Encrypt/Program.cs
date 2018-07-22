@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
 using Encrypt.Protector;
 
 namespace Encrypt
@@ -17,17 +18,22 @@ namespace Encrypt
 
                 var secretFile = args[1];
                 var configFile = args[2];
+                string certFile = null;
+                if (args.Length == 4)
+                {
+                    certFile = args[3];
+                }
 
                 if (args[0] == "e")
                 {
-                    var encrpyter = new Encrypter(secretFile, configFile);
+                    var encrpyter = new Encrypter(secretFile, configFile, certFile);
                     encrpyter.EncryptConfig(secretFile, configFile);
                     Console.WriteLine("Encryption completed!");
                 }
                 else if (args[0] == "d")
                 {
                     var decrypter = new Decrypter(secretFile, configFile);
-                    var decConfig = decrypter.DecryptConfig(secretFile, configFile);
+                    decrypter.DecryptConfig(secretFile, configFile);
                     Console.WriteLine("Decryption completed!");
                 }
                 else

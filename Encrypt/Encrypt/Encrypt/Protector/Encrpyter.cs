@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
@@ -20,6 +21,10 @@ namespace Encrypt.Protector
             {
                 var secretJson = File.ReadAllText(secretFile);
                 var configString = File.ReadAllText(configFile);
+                if (configString.Contains('#'))
+                {
+                    throw new Exception("config file is already encrypted.");
+                }
                 var secretDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(secretJson);
                 foreach (KeyValuePair<string, string> pair in secretDic)
                 {

@@ -14,20 +14,27 @@ namespace Encrypt.Protector
         {
         }
 
-        public IDictionary<string, string> DecryptConfig(string secretFile, string configPath)
+        public void DecryptConfig(string secretFile, string configPath)
         {
             try
             {
                 //1. read from secretFile
                 string secretTxt = File.ReadAllText(secretFile);
-                var encryptJson = Decrypt(secretTxt, base.Cert);
-                while (encryptJson.Contains('#'))
+                string configTxt = File.ReadAllText(configPath);
+                if (!configTxt.Contains('#'))
                 {
-                    var indexOfPunch = encryptJson.IndexOf('#');
-                    encryptJson = encryptJson.Remove(indexOfPunch, 1);
+                    throw new Exception("the config file is not encrypted.");
                 }
+                var encryptJson = Decrypt(secretTxt, base.Cert);
+
                 var encryptDic = JsonConvert.DeserializeObject<Dictionary<string, string>>(encryptJson);
-                return encryptDic;
+                foreach (KeyValuePair<string, string> pair in encryptDic)
+                {
+                    configTxt = configTxt.Replace(pair.Key, pair.Value);
+                }
+
+                File.WriteAllText(secretFile, encryptJson);
+                File.WriteAllText(configPath, configTxt);
             }
             catch (Exception e)
             {

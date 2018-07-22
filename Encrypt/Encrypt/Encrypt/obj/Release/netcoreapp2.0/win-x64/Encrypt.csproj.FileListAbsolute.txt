@@ -1,0 +1,13 @@
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\bin\Release\netcoreapp2.0\win-x64\hostpolicy.dll
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\bin\Release\netcoreapp2.0\win-x64\hostfxr.dll
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\bin\Release\netcoreapp2.0\win-x64\Encrypt.exe
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\bin\Release\netcoreapp2.0\win-x64\Encrypt.deps.json
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\bin\Release\netcoreapp2.0\win-x64\Encrypt.runtimeconfig.json
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\bin\Release\netcoreapp2.0\win-x64\Encrypt.runtimeconfig.dev.json
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\bin\Release\netcoreapp2.0\win-x64\Encrypt.dll
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\bin\Release\netcoreapp2.0\win-x64\Encrypt.pdb
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Release\netcoreapp2.0\win-x64\Encrypt.csproj.CoreCompileInputs.cache
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Release\netcoreapp2.0\win-x64\Encrypt.AssemblyInfoInputs.cache
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Release\netcoreapp2.0\win-x64\Encrypt.AssemblyInfo.cs
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Release\netcoreapp2.0\win-x64\Encrypt.dll
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Release\netcoreapp2.0\win-x64\Encrypt.pdb
