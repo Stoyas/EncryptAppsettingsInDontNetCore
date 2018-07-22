@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="EncryptProvider\" />
+    <Folder Include="Decryption\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

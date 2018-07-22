@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiForEncrypt.EncryptProvider;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,14 @@ namespace ApiForEncrypt
     {
         public static void Main(string[] args)
         {
+            string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+                .AddJsonFile($"appsettings.{environment}.json", optional: false, reloadOnChange: false)
+                .AddDecryptConfigurationBuilder()
+                .AddEnvironmentVariables()
+                .Build();
             BuildWebHost(args).Run();
         }
 
