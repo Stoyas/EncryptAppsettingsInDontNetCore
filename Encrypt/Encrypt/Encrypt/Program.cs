@@ -27,7 +27,7 @@ namespace Encrypt
                 else if (args[0] == "d")
                 {
                     var decrypter = new Decrypter(secretFile, configFile);
-                    decrypter.DecryptConfig(secretFile, configFile);
+                    var decConfig = decrypter.DecryptConfig(secretFile, configFile);
                     Console.WriteLine("Decryption completed!");
                 }
                 else

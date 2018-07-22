@@ -9,7 +9,7 @@ namespace Encrypt.Protector
 {
     public class Encrypter : BaseProtector
     {
-        public Encrypter(string secretFile, string configFile) : base(secretFile, configFile)
+        public Encrypter(string secretFile, string configFile, string certFile = null) : base(secretFile, configFile, certFile)
         {
         }
         public string ProtectedString { get; set; }
@@ -26,8 +26,7 @@ namespace Encrypt.Protector
                     configString = configString.Replace(pair.Value, pair.Key);
                 }
 
-                //ProtectedString = base.DataProtector.Protect(secretJson);
-                ProtectedString = Encrypt(secretJson, base.Thumbprint);
+                ProtectedString = Encrypt(secretJson, base.Cert);
                 // write back to config file
                 File.WriteAllText(configFile, configString);
                 // put protectedJson into file

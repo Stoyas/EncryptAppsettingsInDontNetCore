@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Encrypt.Protector;
 using Microsoft.Extensions.Configuration;
-using Starbucks.Payment.PayPalGateway.WebApi.Decryption;
 
 namespace Starbucks.Payment.PayPalGateway.WebApi.ConfigProvider
 {

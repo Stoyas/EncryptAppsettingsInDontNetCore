@@ -1,0 +1,4 @@
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Debug\netcoreapp2.0\Encrypt.csprojAssemblyReference.cache
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Debug\netcoreapp2.0\Encrypt.csproj.CoreCompileInputs.cache
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Debug\netcoreapp2.0\Encrypt.AssemblyInfoInputs.cache
+D:\Develop\Encrypt-appsettings\Encrypt\Encrypt\Encrypt\obj\Debug\netcoreapp2.0\Encrypt.AssemblyInfo.cs
