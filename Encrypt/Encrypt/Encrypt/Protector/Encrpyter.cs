@@ -44,8 +44,8 @@ namespace Encrypt.Protector
         }
 
         public static string Encrypt(string plainText, string password,
-            string salt = "Starbucks", string hashAlgorithm = "SHA1",
-            int passwordIterations = 2, string initialVector = "OFRna73m*aze01xY",
+            string salt = "Starbucks", string hashAlgorithm = "SHA256",
+            int passwordIterations = 2, string initialVector = "YeGWeh26(oHLvy&Y",
             int keySize = 256)
         {
             if (string.IsNullOrEmpty(plainText))

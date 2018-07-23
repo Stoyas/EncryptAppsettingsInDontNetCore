@@ -2,7 +2,7 @@
   "profiles": {
     "Encrypt": {
       "commandName": "Project",
-      "commandLineArgs": "e D:\\Develop\\paypal-gateway\\PayPalGateway.WebApi\\appsecret.Development.json D:\\Develop\\paypal-gateway\\PayPalGateway.WebApi\\appsettings.Development.json"
+      "commandLineArgs": "d D:\\Develop\\paypal-gateway\\PayPalGateway.WebApi\\appsecret.Development.json D:\\Develop\\paypal-gateway\\PayPalGateway.WebApi\\appsettings.Development.json"
     }
   }
 }
